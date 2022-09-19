@@ -1,0 +1,70 @@
+package org.example.app;
+
+import javax.json.Json;
+import javax.json.bind.Jsonb;
+import javax.json.bind.JsonbBuilder;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import oracle.nosql.driver.values.MapValue;
+
+
+public class App
+{
+
+    public static void main( String[] args )
+    {
+       MachineId machineId = new MachineId();
+       machineId.setName( "Computer");
+       machineId.setVersion( "Dell");
+
+       HashMap<String, String> settings = new HashMap<String, String>();
+       settings.put("keyboard", "French");
+       settings.put("size", "4");
+       settings.put("color", "Grey");
+
+       ArrayList<Transition> transitions = new ArrayList<Transition>();
+       Transition trans = new Transition();
+       trans.setSource("source");
+       trans.setDestination("destination");
+       trans.setAction("action");
+       transitions.add(trans);
+       transitions.add(trans);
+       transitions.add(trans);
+
+       // Create a machine instance
+       Machine machine = new Machine();
+       machine.setMachineId(machineId);
+       machine.setSetting (settings);
+       machine.setTransitions (transitions);
+
+
+       // Create Jsonb and serialize
+       Jsonb jsonb = JsonbBuilder.create();
+       String result = jsonb.toJson(machine);
+       MapValue valueToNoSQL = new MapValue()
+                .put("name", machine.getMachineId().getName())
+                .put("version", machine.getMachineId().getVersion())
+                .putFromJson("kv_json_", result, null);
+
+       System.out.println(  result );
+       System.out.println("  --------------------------- ");
+       System.out.println(  valueToNoSQL );
+       // Deserialize back
+       // read from nosqlDatabase in valueNoSQL
+       MapValue valueFromNoSQL = valueToNoSQL; 
+       machine = jsonb.fromJson(valueToNoSQL.get("kv_json_").toJson(), Machine.class);
+       machine.getMachineId().setName(valueToNoSQL.getString("name"));
+       machine.getMachineId().setVersion(valueToNoSQL.getString("version"));
+       System.out.println("  --------------------------- ");
+       System.out.println("  Machine as Object: " + machine);
+
+
+       String filter = Json.createObjectBuilder().add("machine.name", "Dario").build().toString();
+       System.out.println(  filter);
+
+    }
+}
