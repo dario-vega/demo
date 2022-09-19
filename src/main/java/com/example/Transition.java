@@ -1,4 +1,5 @@
-package org.example.app;
+package com.example;
+
 
 public class Transition {
     private String source;

@@ -1,4 +1,5 @@
-package org.example.app;
+package com.example;
+
 
 import oracle.nosql.driver.NoSQLHandle;
 import oracle.nosql.driver.ops.DeleteRequest;

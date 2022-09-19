@@ -84,6 +84,31 @@
       <artifactId>logback-classic</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.json.bind</groupId>
+      <artifactId>javax.json.bind-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+                    
+    <dependency>
+      <groupId>org.eclipse</groupId>
+      <artifactId>yasson</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.glassfish/jakarta.json -->
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.json</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.oracle.nosql.sdk/nosqldriver -->
+    <dependency>
+      <groupId>com.oracle.nosql.sdk</groupId>
+      <artifactId>nosqldriver</artifactId>
+      <version>5.3.5</version>
+    </dependency>
   </dependencies>
 
   <build>

@@ -1,4 +1,4 @@
-package org.example.app;
+package com.example;
 
 public class MachineId {
     private static final long serialVersionUID = 1L;

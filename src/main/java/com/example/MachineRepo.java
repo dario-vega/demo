@@ -1,4 +1,5 @@
-package org.example.app;
+package com.example;
+
 
 import java.util.List;
 
